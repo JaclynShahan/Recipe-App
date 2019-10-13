@@ -1,0 +1,11 @@
+.headerButtons {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: flex-start;
+    align-content: stretch;
+    background-color: darkblue;
+    width: 100%;
+    padding-top: 16px;
+}
