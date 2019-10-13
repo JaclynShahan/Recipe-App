@@ -20,7 +20,7 @@ const getRecipes = (req , res) => {
     dbInstance.getRecipe().then((resp) => res.status(200).send(resp))
 }
 
-app.get(`/api/getRecipe`, (req, res) => {
+app.get(`/api/getRecipes`, (req, res) => {
     getRecipes(req,res)
 })
 

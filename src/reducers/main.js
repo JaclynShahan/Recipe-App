@@ -1,7 +1,8 @@
 const initialState = {
         title: "",
         directions: "",
-        ingredients: ""
+        ingredients: "",
+        recipes: []
 
 }
 
@@ -17,6 +18,8 @@ export default function reducer (state = initialState, action) {
     return {...tempState, description: action.payload}
     case "INGREDIENTS" :
     return {...tempState, ingredients: action.payload}
+    case "RECIPE_LIST" :
+    return {...tempState, recipes: action.payload}
     }
     return tempState;
 }
