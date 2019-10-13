@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Header from './childComponents/Header';
+import RecipesList from './childComponents/RecipesList';
 import Axios from 'axios';
 import { connect } from 'react-redux';
 
@@ -24,7 +25,7 @@ class Home extends Component {
         return (
             <div>
                 <Header />
-            
+                <RecipesList />
                 
             </div>
         )
