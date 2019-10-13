@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Header from './childComponents/Header';
+import Axios from 'axios';
+import { connect } from 'react-redux';
 
 class Home extends Component {
     constructor() {
@@ -7,6 +9,14 @@ class Home extends Component {
         this.state = {
 
         }
+    }
+
+    componentDidMount = () => {
+        Axios.get(`/api/getRecipes`).then(resp => {
+            console.log(resp)
+            this.props.setRecipeList(resp.data)
+        })
+    
     }
 
     render() {
@@ -21,4 +31,13 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapStateToProps = state => state
+const mapDispatchToProps = dispatch => ({
+    setRecipeList(arr) {
+        dispatch({
+            type: "RECIPE_LIST",
+            payload: arr
+        })
+    }
+})
+export default connect(mapStateToProps, mapDispatchToProps) (Home);
