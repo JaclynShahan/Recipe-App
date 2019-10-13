@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Collapse, Descriptions} from 'antd';
+import {Collapse, Descriptions, Button, Icon} from 'antd';
 import {connect} from 'react-redux';
+import Axios from 'axios';
 
 class RecipesList extends Component {
     constructor() {
@@ -8,6 +9,13 @@ class RecipesList extends Component {
         this.state = {
 
         }
+    }
+
+    onDelete = (id) => {
+        Axios.delete(`/api/deleteRecipe/${id}`).then(resp => {
+            console.log(resp)
+            this.props.setRecipeList(resp.data)
+        })
     }
 
     render() {
@@ -22,6 +30,7 @@ class RecipesList extends Component {
                     <Descriptions.Item layout="vertical" label="ingredients">{rec.ingredients}</Descriptions.Item>
                     <Descriptions.Item layout="vertical" label="directions">{rec.directions}</Descriptions.Item>
                 </Descriptions>
+                <Button onClick={() => this.onDelete(rec.id)}><Icon type="delete"></Icon></Button>
             </Collapse.Panel>
         )
     })
@@ -39,6 +48,12 @@ class RecipesList extends Component {
 }
 const mapStateToProps = state => state
 const mapDispatchToProps = dispatch => ({
+    setRecipeList(arr) {
+        dispatch({
+            type: "RECIPE_LIST",
+            payload: arr
+        })
+    }
     
 })
 

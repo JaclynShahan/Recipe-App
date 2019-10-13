@@ -11,10 +11,6 @@ app.use(express.json());
 
 const port = 3932;
 
-massive(process.env.connectionString).then((db) => {
-    app.set("db", db)
-    console.log("Connected to database")
-})
 const getRecipes = (req , res) => {
     const dbInstance = req.app.get("db")
     dbInstance.getRecipe().then((resp) => res.status(200).send(resp))
@@ -36,6 +32,17 @@ app.post(`/api/createRecipe`, (req, res) => {
     })
 })
 
-app.listen(3932, () => {
-    console.log(`Listening on port ${port}`)
+app.delete(`/api/deleteRecipe/:id`, (req, res) => {
+    const dbInstance = req.app.get("db")
+    dbInstance.deleteRecipe(req.params.id).then((resp) => getRecipes(req,res))
+})
+
+
+
+massive(process.env.connectionString).then((db) => {
+    app.set("db", db)
+    app.listen(3932, () => {
+        console.log(`Listening on port ${port}`)
+    })
+    console.log("Connected to database")
 })
