@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, Modal, Input } from 'antd';
+import { Button, Modal, Input, Icon } from 'antd';
 import './Header.css';
 import {connect} from 'react-redux'; 
 import Axios from 'axios';
@@ -31,6 +31,9 @@ class Header extends Component {
     }
     render() {
         console.log("Props: ", this.props)
+        let searchStyles = {
+            width: 300
+        }
         let styles = {
             height: 64,
             width: "100vw",
@@ -39,6 +42,10 @@ class Header extends Component {
         return (
             <div style={styles} className="headerButtons">
             <Button onClick={() => this.props.setShowModal(true)}>Add Recipe</Button>
+            <Input.Search 
+            style={searchStyles}
+            placeholder="Search for recipes..."
+            />
             <Button onClick={() => this.onRefresh()}>Refresh</Button>
             <Modal
                 className="modal"
