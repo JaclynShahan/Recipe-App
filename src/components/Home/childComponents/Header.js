@@ -12,6 +12,12 @@ class Header extends Component {
         }
     }
 
+    onRefresh = () => {
+        Axios.get(`/api/getRecipes`).then(resp => {
+            console.log(resp)
+            this.props.setRecipeList(resp.data)
+        })
+    }
     onSave = () => {
         Axios.post(`/api/createRecipe`, {
             title: this.props.newRecipe.title,
@@ -33,7 +39,7 @@ class Header extends Component {
         return (
             <div style={styles} className="headerButtons">
             <Button onClick={() => this.props.setShowModal(true)}>Add Recipe</Button>
-            <Button>Refresh</Button>
+            <Button onClick={() => this.onRefresh()}>Refresh</Button>
             <Modal
                 className="modal"
                 onOk={this.onSave}
@@ -96,6 +102,13 @@ const mapDispatchToProps = dispatch => ({ // this adds functions to props
             type: "NEW_INGREDIENT",
             payload: e.target.value
         })
+    },
+      setRecipeList(arr) {
+        dispatch({
+            type: "RECIPE_LIST",
+            payload: arr
+        })
     }
+
 })
 export default connect(mapStateToProps, mapDispatchToProps) (Header)//connect takes 2 objects
