@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Collapse, Descriptions, Button, Icon} from 'antd';
 import {connect} from 'react-redux';
 import Axios from 'axios';
+import './Header.css';
 
 class RecipesList extends Component {
     constructor() {
@@ -22,7 +23,8 @@ class RecipesList extends Component {
         console.log(this.props)
     const panelList = this.props.main.recipes.map((rec) => {
         return(
-            <Collapse.Panel 
+            <Collapse.Panel
+                className="collapsePanels" 
                  header={rec.title}
                  key={rec.id}
                 >
@@ -37,7 +39,7 @@ class RecipesList extends Component {
         return(
             <div>
 
-              <Collapse>
+              <Collapse >
               {panelList}
               </Collapse>  
 

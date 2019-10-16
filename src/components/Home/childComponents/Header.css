@@ -9,3 +9,24 @@
     width: 100%;
     padding-top: 16px;
 }
+
+.collapsePanels {
+    background-color: darkgray;
+    font-weight: bold;
+
+}
+
+.modal {
+    height: 60vh;
+    width: 80vw;
+    
+}
+
+.inputs {
+    margin: 5px;
+}
+
+.textAreas {
+    height: 40vh;
+    width: 80vw;
+}

@@ -20,6 +20,9 @@ class Header extends Component {
         }).then(resp => console.log("Here's the response:", resp))
     }
 
+    onClear = () => {
+    
+    }
     render() {
         console.log("Props: ", this.props)
         let styles = {
@@ -32,6 +35,7 @@ class Header extends Component {
             <Button onClick={() => this.props.setShowModal(true)}>Add Recipe</Button>
             <Button>Refresh</Button>
             <Modal
+                className="modal"
                 onOk={this.onSave}
                 okText="Save"
                 title="Add New Recipe"
@@ -39,16 +43,19 @@ class Header extends Component {
                 visible={this.props.newRecipe.showModal}
             >
             <Input 
+                className="inputs"
                 onChange={(e) => this.props.titleHandler(e)}
                 placeholder="Title"
                 value={this.props.newRecipe.title}
             />
             <Input.TextArea 
+                className="inputs textAreas"
                 onChange={(e) => this.props.ingredientsHandler(e)}
                 placeholder="Ingredients"
                 value={this.props.newRecipe.ingredients}
             />
             <Input.TextArea
+            className="inputs textAreas"
                 onChange={(e) => this.props.directionsHandler(e)} 
                 placeholder="Directions"
                 value={this.props.newRecipe.directions}
