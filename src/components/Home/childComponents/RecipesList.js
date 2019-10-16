@@ -32,7 +32,8 @@ class RecipesList extends Component {
                     <Descriptions.Item layout="vertical" label="ingredients">{rec.ingredients}</Descriptions.Item>
                     <Descriptions.Item layout="vertical" label="directions">{rec.directions}</Descriptions.Item>
                 </Descriptions>
-                <Button onClick={() => this.onDelete(rec.id)}><Icon type="delete"></Icon></Button>
+                <Button className="deleteButton" onClick={() => this.onDelete(rec.id)}><Icon type="delete"></Icon></Button>
+                <Button className="editButton"><Icon type="edit"></Icon></Button>
             </Collapse.Panel>
         )
     })
