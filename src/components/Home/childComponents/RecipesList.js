@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Collapse, Descriptions, Button, Icon} from 'antd';
+import {Collapse, Descriptions, Button, Icon, Modal, Input} from 'antd';
 import {connect} from 'react-redux';
 import Axios from 'axios';
-import './Header.css';
+import EditModal from './EditModal.js';
 
 class RecipesList extends Component {
     constructor() {
@@ -14,6 +14,17 @@ class RecipesList extends Component {
 
     onDelete = (id) => {
         Axios.delete(`/api/deleteRecipe/${id}`).then(resp => {
+            console.log(resp)
+            this.props.setRecipeList(resp.data)
+        })
+    }
+
+    onSaveEdit = (ing, dir, id) => {
+        Axios.put(`/api/updateRecipe`, {
+            ingredients: ing,
+            directions:dir,
+            id: id
+        }).then(resp => {
             console.log(resp)
             this.props.setRecipeList(resp.data)
         })
@@ -32,8 +43,27 @@ class RecipesList extends Component {
                     <Descriptions.Item layout="vertical" label="ingredients">{rec.ingredients}</Descriptions.Item>
                     <Descriptions.Item layout="vertical" label="directions">{rec.directions}</Descriptions.Item>
                 </Descriptions>
-                <Button className="deleteButton" onClick={() => this.onDelete(rec.id)}><Icon type="delete"></Icon></Button>
-                <Button className="editButton"><Icon type="edit"></Icon></Button>
+                <Button 
+                className="deleteButton" 
+                onClick={() => this.onDelete(rec.id)}><Icon type="delete"></Icon></Button>
+                <Button 
+                className="editButton"
+                onClick={() => this.props.setEditModal(true)}
+                ><Icon type="edit"></Icon></Button>
+                <Modal
+                okText=""
+                title="Edit Recipe"
+                onCancel={() => this.props.setEditModal(false)}
+                visible={this.props.main.editModal}
+                footer={[]}
+                >
+               <EditModal 
+                ingredients={rec.ingredients}
+                directions={rec.directions}
+                id={rec.id}
+                onSave={this.onSaveEdit}
+               />
+                </Modal>
             </Collapse.Panel>
         )
     })
@@ -42,7 +72,8 @@ class RecipesList extends Component {
 
               <Collapse >
               {panelList}
-              </Collapse>  
+              </Collapse> 
+    
 
                 
             </div>
@@ -56,7 +87,14 @@ const mapDispatchToProps = dispatch => ({
             type: "RECIPE_LIST",
             payload: arr
         })
+    },
+    setEditModal(val) {
+        dispatch({
+            type: "EDIT_MODAL",
+            payload: val
+        })
     }
+   
     
 })
 

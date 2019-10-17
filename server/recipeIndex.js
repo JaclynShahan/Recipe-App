@@ -32,6 +32,17 @@ app.post(`/api/createRecipe`, (req, res) => {
     })
 })
 
+app.put(`/api/updateRecipe`, (req, res) => {
+    const {id, directions, ingredients} = req.body
+    console.log(req.body)
+    console.log("updated", id, directions, ingredients)
+    const dbInstance = req.app.get("db")
+    dbInstance.updateRecipe(id, ingredients, directions)
+    .then(() => {
+        getRecipes(req, res)
+    })
+})
+
 app.delete(`/api/deleteRecipe/:id`, (req, res) => {
     const dbInstance = req.app.get("db")
     dbInstance.deleteRecipe(req.params.id).then((resp) => getRecipes(req,res))

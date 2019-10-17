@@ -2,7 +2,8 @@ const initialState = {
     title: "",
     directions: "",
     ingredients: "",
-    showModal: false
+    showModal: false,
+    
 
 }
 
@@ -21,5 +22,6 @@ return {...tempState, ingredients: action.payload}
 case "SHOW_NEW_MODAL" :
 return {...tempState, showModal: action.payload}
 }
+
 return tempState;
 }
