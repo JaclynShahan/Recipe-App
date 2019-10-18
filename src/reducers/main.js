@@ -3,7 +3,8 @@ const initialState = {
         directions: "",
         ingredients: "",
         recipes: [],
-        editModal: false
+        editModal: false,
+        searchRecipes: []
 
 }
 
@@ -22,7 +23,9 @@ export default function reducer (state = initialState, action) {
     case "RECIPE_LIST" :
     return {...tempState, recipes: action.payload}
     case "EDIT_MODAL" :
-    return {...tempState, editModal: action.payload }
+    return {...tempState, editModal: action.payload}
+    case "SEARCH_RECIPES" :
+    return {...tempState, searchRecipes: action.payload}
 }
     
     return tempState;

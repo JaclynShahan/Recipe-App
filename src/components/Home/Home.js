@@ -4,11 +4,12 @@ import RecipesList from './childComponents/RecipesList';
 import Axios from 'axios';
 import { connect } from 'react-redux';
 
+
 class Home extends Component {
     constructor() {
         super()
         this.state = {
-
+            recipes: []
         }
     }
 
@@ -21,11 +22,36 @@ class Home extends Component {
     }
 
     render() {
+       const {searchRecipes} = this.props.main
+        const {recipes} = this.state
         console.log(this.props)
         return (
             <div>
                 <Header />
-                <RecipesList />
+
+                {searchRecipes.length > 0 
+                ? searchRecipes.map(recipe => (
+                    <RecipesList 
+                    key={recipe.id}
+                    id={recipe.id}
+                    ingredients={recipe.ingredients}
+                    directions={recipe.directions}
+                    recipe={recipe}
+                    />
+                ))
+              : recipes.map(recipe => (
+                  <RecipesList 
+                  key={recipe.id}
+                  id={recipe.id}
+                  ingredients={recipe.ingredients}
+                  directions={recipe.directions}
+                  recipe={recipe}
+                  />
+              ))
+                  
+                }
+              
+                <RecipesList /> 
                 
             </div>
         )
@@ -37,6 +63,12 @@ const mapDispatchToProps = dispatch => ({
     setRecipeList(arr) {
         dispatch({
             type: "RECIPE_LIST",
+            payload: arr
+        })
+    },
+    setSearchRecipe(arr) {
+        dispatch({
+            type: "SEARCH_RECIPES",
             payload: arr
         })
     }

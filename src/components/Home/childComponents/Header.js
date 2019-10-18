@@ -3,6 +3,7 @@ import { Button, Modal, Input, Icon } from 'antd';
 import './Header.css';
 import {connect} from 'react-redux'; 
 import Axios from 'axios';
+import Search from './Search.js';
 
 class Header extends Component {
     constructor() {
@@ -31,9 +32,9 @@ class Header extends Component {
     }
     render() {
         console.log("Props: ", this.props)
-        let searchStyles = {
-            width: 300
-        }
+        // let searchStyles = {
+        //     width: 300
+        // }
         let styles = {
             height: 64,
             width: "100vw",
@@ -42,10 +43,11 @@ class Header extends Component {
         return (
             <div style={styles} className="headerButtons">
             <Button onClick={() => this.props.setShowModal(true)}>Add Recipe</Button>
-            <Input.Search 
+            {/* <Input.Search 
             style={searchStyles}
             placeholder="Search for recipes..."
-            />
+            /> */}
+            <Search />
             <Button onClick={() => this.onRefresh()}>Refresh</Button>
             <Modal
                 className="modal"
