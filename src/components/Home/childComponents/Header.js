@@ -24,7 +24,12 @@ class Header extends Component {
             title: this.props.newRecipe.title,
             ingredients: this.props.newRecipe.ingredients,
             directions: this.props.newRecipe.directions
-        }).then(resp => console.log("Here's the response:", resp))
+        }).then(resp => {
+            console.log("Here's the response:", resp)
+            // #TODO I'm pretty sure this response has data in it that 
+            // is used to refresh your list of recipes with the newly
+            // added data
+        })
     }
 
     onClear = () => {

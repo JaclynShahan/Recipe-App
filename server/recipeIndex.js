@@ -33,11 +33,11 @@ app.post(`/api/createRecipe`, (req, res) => {
 })
 
 app.put(`/api/updateRecipe`, (req, res) => {
-    const {id, directions, ingredients} = req.body
+    const {id, directions, ingredients, title} = req.body
     console.log(req.body)
-    console.log("updated", id, directions, ingredients)
+    console.log("updated", id, directions, ingredients, title)
     const dbInstance = req.app.get("db")
-    dbInstance.updateRecipe(id, ingredients, directions)
+    dbInstance.updateRecipe(id, ingredients, directions, title)
     .then(() => {
         getRecipes(req, res)
     })

@@ -9,7 +9,7 @@ class Home extends Component {
     constructor() {
         super()
         this.state = {
-            recipes: []
+            //recipes: []
         }
     }
 
@@ -20,38 +20,33 @@ class Home extends Component {
         })
     
     }
-
+    whichData = () => {
+        // if (this.props.main.searchRecipes.length > 0) {
+            // return this.props.main.searchRecipes
+        // } else {
+            return this.props.main.recipes
+        // }
+    }
     render() {
-       const {searchRecipes} = this.props.main
-        const {recipes} = this.state
+     console.log("Hi")
         console.log(this.props)
         return (
             <div>
                 <Header />
 
-                {searchRecipes.length > 0 
-                ? searchRecipes.map(recipe => (
+                {this.whichData().map(recipe => (
                     <RecipesList 
                     key={recipe.id}
                     id={recipe.id}
+                    // you need title here too
+                    title={recipe.title}
                     ingredients={recipe.ingredients}
                     directions={recipe.directions}
                     recipe={recipe}
                     />
-                ))
-              : recipes.map(recipe => (
-                  <RecipesList 
-                  key={recipe.id}
-                  id={recipe.id}
-                  ingredients={recipe.ingredients}
-                  directions={recipe.directions}
-                  recipe={recipe}
-                  />
-              ))
-                  
-                }
+                ))}
               
-                <RecipesList /> 
+                
                 
             </div>
         )
@@ -65,12 +60,7 @@ const mapDispatchToProps = dispatch => ({
             type: "RECIPE_LIST",
             payload: arr
         })
-    },
-    setSearchRecipe(arr) {
-        dispatch({
-            type: "SEARCH_RECIPES",
-            payload: arr
-        })
     }
+ 
 })
 export default connect(mapStateToProps, mapDispatchToProps) (Home);

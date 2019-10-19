@@ -13,6 +13,7 @@ class Search extends Component {
     onSearch = () => {
         if (this.state.searchRec.length > 0) {
             const filterRecipe = this.props.main.recipes.filter(recipe => {
+                
                 if (
                     recipe.ingredients
                     .toLowerCase()
@@ -54,8 +55,8 @@ class Search extends Component {
             placeholder="Search for recipes..."
             value={searchRec}
             onChange={e => this.setState({searchRec: e.target.value})}
-            onKey={e => this.onKey(e)}
-            onClick={() => this.onSearch()}
+            //onKey={e => this.onKey(e)}
+            onSearch={() => this.onSearch()} // no need for the onclick that was here.
             />
 
             </div>
