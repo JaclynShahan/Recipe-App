@@ -48,6 +48,17 @@ app.delete(`/api/deleteRecipe/:id`, (req, res) => {
     dbInstance.deleteRecipe(req.params.id).then((resp) => getRecipes(req,res))
 })
 
+app.post(`/api/verifyPassword`, (req, res) => {
+    console.log("Request Received")
+    const {password} = req.body
+    console.log(process.env.pin)
+    console.log(password)
+    if (password == process.env.pin) {
+        res.status(200).send(true)
+    } else {
+        res.status(200).send(false)
+    }
+})
 
 
 massive(process.env.connectionString).then((db) => {
