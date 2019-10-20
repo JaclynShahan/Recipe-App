@@ -45,14 +45,14 @@ class Search extends Component {
 
     render() {
         let searchStyles = {
-            width: 300
+            width: 100
         }
         const {searchRec} = this.state
         return (
             <div>
             <Input.Search 
             style={searchStyles}
-            placeholder="Search for recipes..."
+            placeholder="Search..."
             value={searchRec}
             onChange={e => this.setState({searchRec: e.target.value})}
             //onKey={e => this.onKey(e)}

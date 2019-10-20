@@ -27,11 +27,22 @@ class RecipesList extends Component {
       title: title
     }).then(resp => {
       console.log(resp)
+      this.props.setEditModal(false)
       this.props.setRecipeList(resp.data)
     })
   }
 
+  openEdit = () => {
+    const {recipe} = this.props
+        //putting recipe in editModal reducer
+        this.props.setInspected(recipe)
+        this.props.setEditModal(true) //showing modal
+  }
+
   render () {
+      let styles = {
+          textAlign: "left"
+      }
      //const {ingredients, id, title, directions} = editModal;
     // you're double mapping here
     // you're mapping over Recipes here and ALSO in Home
@@ -44,13 +55,17 @@ class RecipesList extends Component {
             header={this.props.title} // #TODO import this in on props
             key={this.props.id} // #TODO  this is already coming in on props
           >
-            <Descriptions column={1}>
+            <Descriptions style={styles} column={1}>
               {/* // #TODO These 2 descriptions are coming in on props */}
-              <Descriptions.Item layout='vertical' label='ingredients'>
-                {this.props.ingredients}
+              <Descriptions.Item layout='vertical'>
+                 <header>Ingredients:</header>
+
+                 <pre>{this.props.ingredients}</pre>
               </Descriptions.Item>
-              <Descriptions.Item layout='vertical' label='directions'>
-                {this.props.directions}
+              <Descriptions.Item layout='vertical'>
+                  <header>Directions:</header>
+
+                 <pre>{this.props.directions}</pre>
               </Descriptions.Item>
             </Descriptions>
             <Button
@@ -62,7 +77,7 @@ class RecipesList extends Component {
             </Button>
             <Button
               className='editButton'
-              onClick={() => this.props.setEditModal(true)}
+              onClick={() => this.openEdit()}
             >
               <Icon type='edit' />
             </Button>
@@ -106,6 +121,12 @@ const mapDispatchToProps = dispatch => ({
       type: 'EDIT_MODAL',
       payload: val
     })
+  },
+  setInspected (recipe) {
+      dispatch({
+          type: "SET_EDIT_RECIPE",
+          payload: recipe
+      })
   }
 })
 

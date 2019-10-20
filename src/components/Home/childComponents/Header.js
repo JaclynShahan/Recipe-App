@@ -25,6 +25,8 @@ class Header extends Component {
             ingredients: this.props.newRecipe.ingredients,
             directions: this.props.newRecipe.directions
         }).then(resp => {
+            //this.props.setEditModal(false)
+            this.props.setRecipeList(resp.data)
             console.log("Here's the response:", resp)
             // #TODO I'm pretty sure this response has data in it that 
             // is used to refresh your list of recipes with the newly

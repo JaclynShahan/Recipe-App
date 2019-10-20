@@ -14,10 +14,11 @@ class EditModal extends Component {
 
     render () {
         const {ingredients, directions, id, title} = this.props.editModal
+        console.log("Props", this.props)
         //const {id} = this.props;
         return(
             <div>
-                <Input.TextArea 
+                <Input 
                 onChange={e => this.props.setEditTitle(e)}
                 value={this.props.editModal.title}
                 />

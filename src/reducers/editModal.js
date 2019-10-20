@@ -21,6 +21,8 @@ export default function reducer (state = initialState, action) {
         return {...tempState, ingredients: action.payload}
         case "EDIT_ID" :
         return {...tempState, id: action.payload}
+        case "SET_EDIT_RECIPE" :
+        return {...tempState, ...action.payload}
    
 
     }

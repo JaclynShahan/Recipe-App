@@ -5,13 +5,13 @@
 	justify-content: space-around;
 	align-items: flex-start;
     align-content: stretch;
-    background-color: darkblue;
+    background-color: rgb(57, 129, 211);
     width: 100%;
     padding-top: 16px;
 }
 
 .collapsePanels {
-    background-color: darkgray;
+    background-color: lightblue;
     font-weight: bold;
 
 }
@@ -32,8 +32,10 @@
 }
 .deleteButton {
     float: right;
+    width: 50px;
 }
 
 .editButton {
     float: left;
+    width: 50px;
 }
